@@ -47,7 +47,7 @@ class Grades extends REST_Controller {
 				preg_match_all($team_comment_pattern, $html, $matches);	
 				$messy_team_comment = $matches[1][0];
 				preg_match_all("/<font class=iContent>(.*)<\/font>/", $messy_team_comment, $matches);
-				$module_array["team_comment"] = $matches[1];
+				$module_array["team_comment"] = $matches[1][0];
 				
 				
 				preg_match_all($individual_comment_pattern, $html, $matches);	
@@ -55,7 +55,7 @@ class Grades extends REST_Controller {
 				
 				
 				preg_match_all($attendance_pattern, $html, $matches);
-				$module_array["attendance"] = $matches[1];
+				$module_array["attendance"] = $matches[1][0];
 				
 				$recent_grades[] = $module_array;
 			}

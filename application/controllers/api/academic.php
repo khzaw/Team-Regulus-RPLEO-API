@@ -13,13 +13,8 @@ class Academic extends REST_Controller {
 			$password = $this->get('password');
 			$url = "http://myrp.sg/sass-student/AcademicInformation.aspx";
 			
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_NTLM);
-			curl_setopt($ch, CURLOPT_USERPWD, "$sid:$password");
-			$html = curl_exec($ch);
-			curl_close($ch);
+			
+			$html = get_html($sid, $password, $url);
 			
 			$ce_diploma_pattern = '/id="ctl00_ContentPlaceHolderMain_lblCEDiploma" class="gen12"><b>(.*)<\/b>/';
 			$ce_nondiploma_pattern = '/id="ctl00_ContentPlaceHolderMain_lblCENDiploma" class="gen12"><b>(.*)<\/b>/';
@@ -30,19 +25,19 @@ class Academic extends REST_Controller {
 			$phno_pattern = '/id="ctl00_ContentPlaceHolderMain_lblContactNo" class="gen12">(.*)<\/span>/';
 			
 			preg_match_all($name_pattern, $html, $matches);
-			$name = $matches[1];
+			$name = $matches[1][0];
 			preg_match_all($diploma_pattern, $html, $matches);
-			$diploma = $matches[1];
+			$diploma = $matches[1][0];
 			preg_match_all($gpa_pattern, $html, $matches);
-			$gpa = $matches[1];
+			$gpa = $matches[1][0];
 			preg_match_all($phno_pattern, $html, $matches);
-			$phno = $matches[1];
+			$phno = $matches[1][0];
 			preg_match_all($fin_pattern, $html, $matches);
-			$fin = $matches[1];
+			$fin = $matches[1][0];
 			preg_match_all($ce_diploma_pattern, $html, $matches);
-			$ce_diploma = $matches[1];
+			$ce_diploma = $matches[1][0];
 			preg_match_all($ce_nondiploma_pattern, $html, $matches);
-			$ce_nondiploma = $matches[1];
+			$ce_nondiploma = $matches[1][0];
 
 
 			if($name && $diploma && $gpa && $phno && $ce_diploma && $ce_nondiploma) {
