@@ -1,3 +1,8 @@
 API to interact with RP LEO.
 
+Removed support for GET requests.
+Only POST requests are accepted.
+
 Refer to http://rpleobot.appspot.com for API Documentation.
+
+Follow @geeksatrp @emoosx @rpleoapp for latest news and updates.
