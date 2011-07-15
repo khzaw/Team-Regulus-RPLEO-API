@@ -3,14 +3,14 @@ require(APPPATH . '/libraries/REST_Controller.php');
 
 class Grades extends REST_Controller {
 	
-	function recentGrades_get()
+	function recentGrades_post()
 	{
-		if(!($this->get('sid') && $this->get('password'))) {
+		if(!($this->post('sid') && $this->post('password'))) {
 			$this->response(NULL, 404);
 		}
 		else {
-			$sid = $this->get('sid');
-			$password = $this->get('password');
+			$sid = $this->post('sid');
+			$password = $this->post('password');
 			$recent_grades_url = "http://leo.rp.edu.sg/workspace/studentGrades.asp";
 			$problem_url = "http://leo3.rp.edu.sg//projectweb/daily_grade.asp?courseid=";
 			
@@ -69,13 +69,13 @@ class Grades extends REST_Controller {
 		}
 	}
 	
-	function recentUTGrades_get() {
-		if(!($this->get('sid') && $this->get('password'))) {
+	function recentUTGrades_post() {
+		if(!($this->post('sid') && $this->post('password'))) {
 			$this->response(NULL, 404);
 		}
 		else {
-			$sid = $this->get('sid');
-			$password = $this->get('password');
+			$sid = $this->post('sid');
+			$password = $this->post('password');
 			$recent_grades_url = "http://leo.rp.edu.sg/workspace/studentGrades.asp";
 			
 			$html = get_html($sid, $password, $recent_grades_url);

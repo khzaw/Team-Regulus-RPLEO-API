@@ -3,14 +3,14 @@ require(APPPATH . '/libraries/REST_Controller.php');
 
 class Academic extends REST_Controller {
 
-	function particulars_get() 
+	function particulars_post() 
 	{
-		if(!($this->get('sid') && $this->get('password'))) {
+		if(!($this->post('sid') && $this->post('password'))) {
 			$this->response(NULL, 404);
 		}
 		else {
-			$sid = $this->get('sid');
-			$password = $this->get('password');
+			$sid = $this->post('sid');
+			$password = $this->post('password');
 			$url = "http://myrp.sg/sass-student/AcademicInformation.aspx";
 			
 			
@@ -44,7 +44,7 @@ class Academic extends REST_Controller {
 				$this->response(array("name" => $name, "diploma" => $diploma, "gpa" => $gpa, "phno" => $phno, "fin" => $fin,"ce_diploma" => $ce_diploma, "ce_nondiploma" => $ce_nondiploma), 200);
 			}
 			else {
-				$this->response(null, 404);
+				$this->response(array("error"=>"Wrong Student ID/password combination"), 404);
 			}		
 		}
 	}
