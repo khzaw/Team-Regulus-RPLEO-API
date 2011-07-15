@@ -23,6 +23,7 @@ a {
  color: #003399;
  background-color: transparent;
  font-weight: normal;
+ text-decoration: none;
 }
 
 h1 {
@@ -57,7 +58,10 @@ code {
 <p id="notice">Please note that I do not <b>STORE</b> nor <b>LOG</b> any of your credentials.</p>
 
 <h1>Recent Updates</h1>
-<p>Removed support for GET requests. Every request should be done via POST. The data you need to pass in are <b>sid</b> and <b>password</b>. Please feel free to visit the code repository for verification.</p>
+  <p>*  Removed support for GET requests. Every request is to be done via POST. The data you need to pass in are <b>sid</b> and <b>password</b>. Please feel free to visit the code repository for verification.</p>
+ <p>*  Support for retrieving UT Schedules and Class Timetable.</p>
+ 
+ <p>For latest news and updates, follow <a href="http://twitter.com/#!/geeksatrp">@GeeksAtRP</a> <a href="http://twitter.com/#!/rpleoapp">@RPLeoApp</a> <a href="http://twitter.com/#!/emoosx">@emoosx</a> <a href="http://twitter.com/#!/yemyat91">@yemyat91</a> <a href="http://twitter.com/#!/ruqqq">@ruqqq</a> on twitter.</p>
 
 <h1>Personal Particulars</h1>
 
