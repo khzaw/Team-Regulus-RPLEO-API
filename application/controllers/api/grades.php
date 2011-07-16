@@ -40,7 +40,7 @@ class Grades extends REST_Controller {
 				
 			$recent_grades = array();
 			for($i = 0; $i < count($modules); $i++) {
-				$module_array= array("module_code" => $modules[$i], "problem" => $problems[$i], "grade" => $grades[$i]);
+				$module_array= array("module_code" => $modules[$i], "module_name" => get_module_name($sid, $password, $modules[$i]), "problem" => $problems[$i], "grade" => $grades[$i]);
 				$url = $problem_url.$courseIDs[$i]."&projectid=" . $projectIDs[$i];
 				$html = get_html($sid, $password, $url);
 				
@@ -96,7 +96,7 @@ class Grades extends REST_Controller {
 			
 			$recent_ut_grades = array();
 			for($i = 0; $i < count($utModules); $i++) {
-				$module_array = array("module_code" => $utModules[$i], "ut_no" => $utNo[$i], "ut_grade" => $utGrades[$i]);
+				$module_array = array("module_code" => $utModules[$i], "module_name" => get_module_name($sid, $password, $utModules[$i]) ,"ut_no" => $utNo[$i], "ut_grade" => $utGrades[$i]);
 				$recent_ut_grades[] = $module_array;
 			}
 			
