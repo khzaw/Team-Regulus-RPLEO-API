@@ -105,6 +105,27 @@ class Grades extends REST_Controller {
 		}
 	}
 	
+	function allModuleSummary_get() {
+		if(!($this->get('sid') && $this->get('password'))) {
+			$this->response(NULL, 404);
+		}
+		else {
+			$sid = $this->get('sid');
+			$password = $this->get('password');
+			$glob = get_all_module_codes($sid, $password);
+			
+			$module_codes = $glob["module_codes"];
+			$course_ids = $glob["course_ids"];
+		
+			/* pyin dal kwar */
+			
+			
+			
+			$this->response($module_codes, 200);
+			
+		}
+	}
+	
 	function recentGrades_get()
 	{
 		if(!($this->get('sid') && $this->get('password'))) {
