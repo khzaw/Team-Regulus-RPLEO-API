@@ -60,6 +60,7 @@ code {
 <h1>Recent Updates</h1>
   <p>*  Removed support for GET requests. Every request is to be done via POST. The data you need to pass in are <b>sid</b> and <b>password</b>. Please feel free to visit the code repository for verification.</p>
  <p>*  Support for retrieving UT Schedules and Class Timetable.</p>
+<p>* Support for retrieving Module Summary Information for All Modules <b>(every grade for every problem of every module)</b></p>
  
  <p>For latest news and updates, follow <a href="http://twitter.com/#!/geeksatrp">@GeeksAtRP</a> <a href="http://twitter.com/#!/rpleoapp">@RPLeoApp</a> <a href="http://twitter.com/#!/emoosx">@emoosx</a> <a href="http://twitter.com/#!/yemyat91">@yemyat91</a> <a href="http://twitter.com/#!/ruqqq">@ruqqq</a> on twitter.</p>
 
