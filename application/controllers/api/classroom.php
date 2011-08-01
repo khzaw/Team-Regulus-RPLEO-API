@@ -139,6 +139,8 @@ class Classroom  extends REST_Controller
 			preg_match_all($days_pattern, $html, $matches);
 			$days = $matches[1];
 			
+			$module_names = get_module_name($sid, $password, $module_codes);
+			
 			
 			if($ut_names && $ut_nos && $module_codes && $venues && $times && $dates && $days)
 			{
@@ -149,7 +151,7 @@ class Classroom  extends REST_Controller
 						"ut_name" => $ut_names[$i],
 						"ut_no" => $ut_nos[$i],
 						"module_code" => $module_codes[$i],
-						"module_name" => get_module_name($sid,$password, $module_codes[$i]),
+						"module_name" => $module_names[$i],
 						"venue" => $venues[$i],
 						"time" => $times[$i],
 						"date" => $dates[$i],

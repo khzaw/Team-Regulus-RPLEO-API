@@ -118,6 +118,15 @@ code {
 			<li>ut_no</li>
 			<li>ut_grade</li>
 		</ul>
+		
+<h1>Module Summary for All Modules</h1>
+<code>http://emoosx.me/regulus/api/grades/allModuleSummary</code>
+		<ul>
+			<li>module_code</li>
+			<li>module_name</li>
+			<li>daily_grades</li>
+			<li>ut_grades
+		</ul>
 	
 <h1>Related Projects</h1>
 <h4>LeoApp for Android</h4>
