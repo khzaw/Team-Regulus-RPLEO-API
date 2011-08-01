@@ -124,18 +124,66 @@ class Grades extends REST_Controller {
 			$glob = get_all_module_codes($sid, $password);
 			
 			$module_codes = $glob["module_codes"];
-			$module_names = get_module_name($sid, $password, $module_codes);
 			
+			$module_names = get_module_name($sid, $password, $module_codes);		
 			$course_ids = $glob["course_ids"];
 		
-			//for($i = 0; $i < count($module_codes); $i++) {
+			$result = array();
+			
+			$i = 0;
+			foreach($module_names as $mn) {
+				$one_module = array(
+					"module_name" => $mn,
+					"module_code" => $module_codes[$i],
+				);
 				
-			//}
+				$grades = get_module_summary($sid, $password, $course_ids[$i]);
+				
+				$one_module["daily_grades"] = $grades["problem_grades"];
+				$one_module["ut_grades"] = $grades["ut_grades"];
+				
+				$result[] = $one_module;		
+				$i++;
+			}		
 			
 			
+			$this->response($result, 200);
 			
-			$this->response($module_names, 200);
+		}
+	}
+	
+	function allModuleSummary_post() {
+		if(!($this->post('sid') && $this->post('password'))) {
+			$this->response(NULL, 404);
+		}
+		else {
+			$sid = $this->post('sid');
+			$password = $this->post('password');
+			$glob = get_all_module_codes($sid, $password);
 			
+			$module_codes = $glob["module_codes"];
+			
+			$module_names = get_module_name($sid, $password, $module_codes);		
+			$course_ids = $glob["course_ids"];
+		
+			$result = array();
+			
+			$i = 0;
+			foreach($module_names as $mn) {
+				$one_module = array(
+					"module_name" => $mn,
+					"module_code" => $module_codes[$i],
+				);
+				
+				$grades = get_module_summary($sid, $password, $course_ids[$i]);
+				
+				$one_module["daily_grades"] = $grades["problem_grades"];
+				$one_module["ut_grades"] = $grades["ut_grades"];
+				
+				$result[] = $one_module;		
+				$i++;
+			}		
+			$this->response($result, 200);		
 		}
 	}
 	

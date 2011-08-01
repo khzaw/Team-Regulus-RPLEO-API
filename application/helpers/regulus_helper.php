@@ -78,7 +78,7 @@ if(! function_exists('element'))
 {
 	function get_module_summary($sid, $password, $course_id)
 	{
-		$url = "http://leo3.rp.edu.sg//projectweb/student_summary.asp?courseid=" . $couse_id;
+		$url = "http://leo3.rp.edu.sg//projectweb/student_summary.asp?courseid=" . $course_id;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -92,7 +92,7 @@ if(! function_exists('element'))
 		$problem_grades = $matches[1];
 		
 		$ut_grades_pattern = "/<font class=iContent>(.{1,2})<\/font>/";
-		preg_match_all($$ut_grades_pattern, $html, $matches);
+		preg_match_all($ut_grades_pattern, $html, $matches);
 		$ut_grades = $matches[1];
 		
 		$result = array("problem_grades" => $problem_grades, "ut_grades" => $ut_grades);
