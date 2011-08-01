@@ -18,6 +18,9 @@ if(! function_exists('element'))
 if(! function_exists('element'))
 {
 	function get_module_name($sid, $password, $module_code)
+	
+	// $module_code is an array.
+	
 	{
 		$url = "http://leo.rp.edu.sg/workspace/studentModule.asp?disp=all";
 		$ch = curl_init();
@@ -28,9 +31,19 @@ if(! function_exists('element'))
 		$html = curl_exec($ch);
 		curl_close($ch);
 		
-		$pattern = "/$module_code-\d-\w\d\d\w-[ABC]<\/a>&nbsp;&nbsp;<a href='javascript:\/\/' class=ttitle onMouseOver=\"popup\('<font color=darkblue> Owner: .*<\/font>', '#F1F1F1', '280'\);\" OnMouseOut='kill\(\)'><i>(.*)<\/i>/";
-		preg_match_all($pattern, $html, $matches);
-		return $matches[1][0];
+		
+		
+		
+		$result = array();
+		
+		if($module_code) {
+			foreach($module_code as $mc) {
+				$pattern = "/$mc-\d-\w\d\d\w-[ABC]<\/a>&nbsp;&nbsp;<a href='javascript:\/\/' class=ttitle onMouseOver=\"popup\('<font color=darkblue> Owner: .*<\/font>', '#F1F1F1', '280'\);\" OnMouseOut='kill\(\)'><i>(.*)<\/i>/";
+				preg_match_all($pattern, $html, $matches);
+				$result[] = $matches[1][0];
+			}		
+		}
+		return $result;
 	}
 
 }
@@ -56,7 +69,7 @@ if(! function_exists('element'))
 		preg_match_all($course_id_pattern, $html, $matches);
 		$course_ids = $matches[1];
 		
-		$result = array("module_codes" => $module_codes, "project_ids" => $course_ids);
+		$result = array("module_codes" => $module_codes, "course_ids" => $course_ids);
 		return $result;
 	}
 }
@@ -83,7 +96,7 @@ if(! function_exists('element'))
 		$ut_grades = $matches[1];
 		
 		$result = array("problem_grades" => $problem_grades, "ut_grades" => $ut_grades);
-		return $result
+		return $result;
 		
 	}
 }

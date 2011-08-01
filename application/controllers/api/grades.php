@@ -37,13 +37,15 @@ class Grades extends REST_Controller {
 			preg_match_all($projectID_pattern, $html, $matches);
 			$projectIDs = $matches[1];
 			
+			$module_names = get_module_name($sid, $password, $modules);
+			
 				
 			$recent_grades = array();
 			
 			for($i = 0; $i < count($modules); $i++) {
 				$module_array= array(
 					"module_code" => $modules[$i], 
-					"module_name" => get_module_name($sid, $password, $modules[$i]), 
+					"module_name" => $module_names[$i], 
 					"problem" => $problems[$i], 
 					"grade" => $grades[$i]
 					);
@@ -78,7 +80,7 @@ class Grades extends REST_Controller {
 			
 			$utModules_pattern = "/'_blank'>(.{4})-\d-.{4}-\w<\/a>.{300,303}UT/";
 			$utNo_pattern = "/UT ([1-3])/";
-			$utGrades_pattern = "/}&order=1' target='_blank'>(.{1,2})</";
+			$utGrades_pattern = "/}&order=[123]' target='_blank'>(.{0,2})<\/a>/";
 			$courseID_pattern = "/projectweb\/student_summary.asp\?courseid=(.{38})/";
 			
 			preg_match_all($utModules_pattern, $html, $matches);
@@ -90,9 +92,16 @@ class Grades extends REST_Controller {
 			preg_match_all($courseID_pattern, $html, $matches);
 			$courseIDs = $matches[1];
 			
+			$module_names = get_module_name($sid, $password,$utModules);
+			
 			$recent_ut_grades = array();
 			for($i = 0; $i < count($utModules); $i++) {
-				$module_array = array("module_code" => $utModules[$i], "module_name" => get_module_name($sid, $password, $utModules[$i]) ,"ut_no" => $utNo[$i], "ut_grade" => $utGrades[$i]);
+				$module_array = array(
+					"module_code" => $utModules[$i], 
+					"module_name" => $module_names[$i],
+					"ut_no" => $utNo[$i], 
+					"ut_grade" => $utGrades[$i]
+				);
 				$recent_ut_grades[] = $module_array;
 			}
 			
@@ -115,16 +124,22 @@ class Grades extends REST_Controller {
 			$glob = get_all_module_codes($sid, $password);
 			
 			$module_codes = $glob["module_codes"];
+			$module_names = get_module_name($sid, $password, $module_codes);
+			
 			$course_ids = $glob["course_ids"];
 		
-			/* pyin dal kwar */
+			//for($i = 0; $i < count($module_codes); $i++) {
+				
+			//}
 			
 			
 			
-			$this->response($module_codes, 200);
+			$this->response($module_names, 200);
 			
 		}
 	}
+	
+	
 	
 	function recentGrades_get()
 	{
@@ -160,13 +175,15 @@ class Grades extends REST_Controller {
 			preg_match_all($projectID_pattern, $html, $matches);
 			$projectIDs = $matches[1];
 			
+			$module_names = get_module_name($sid, $password, $modules);
+			
 				
 			$recent_grades = array();
 			
 			for($i = 0; $i < count($modules); $i++) {
 				$module_array= array(
 					"module_code" => $modules[$i], 
-					"module_name" => get_module_name($sid, $password, $modules[$i]), 
+					"module_name" => $module_names[$i], 
 					"problem" => $problems[$i], 
 					"grade" => $grades[$i]
 					);
@@ -188,6 +205,7 @@ class Grades extends REST_Controller {
 		}
 	}
 	
+	
 	function recentUTGrades_get() {
 		if(!($this->get('sid') && $this->get('password'))) {
 			$this->response(NULL, 404);
@@ -201,7 +219,7 @@ class Grades extends REST_Controller {
 			
 			$utModules_pattern = "/'_blank'>(.{4})-\d-.{4}-\w<\/a>.{300,303}UT/";
 			$utNo_pattern = "/UT ([1-3])/";
-			$utGrades_pattern = "/}&order=1' target='_blank'>(.{1,2})</";
+			$utGrades_pattern = "/}&order=[123]' target='_blank'>(.{0,2})<\/a>/";
 			$courseID_pattern = "/projectweb\/student_summary.asp\?courseid=(.{38})/";
 			
 			preg_match_all($utModules_pattern, $html, $matches);
@@ -213,9 +231,16 @@ class Grades extends REST_Controller {
 			preg_match_all($courseID_pattern, $html, $matches);
 			$courseIDs = $matches[1];
 			
+			$module_names = get_module_name($sid, $password,$utModules);
+			
 			$recent_ut_grades = array();
 			for($i = 0; $i < count($utModules); $i++) {
-				$module_array = array("module_code" => $utModules[$i], "module_name" => get_module_name($sid, $password, $utModules[$i]) ,"ut_no" => $utNo[$i], "ut_grade" => $utGrades[$i]);
+				$module_array = array(
+					"module_code" => $utModules[$i], 
+					"module_name" => $module_names[$i],
+					"ut_no" => $utNo[$i], 
+					"ut_grade" => $utGrades[$i]
+				);
 				$recent_ut_grades[] = $module_array;
 			}
 			
@@ -227,5 +252,5 @@ class Grades extends REST_Controller {
 			}
 		}
 	}
-
+	
 }
